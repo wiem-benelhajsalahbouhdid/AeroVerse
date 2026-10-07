@@ -1,8 +1,8 @@
-# 🚀 AeroVerse — VR Aerospace Education & Outreach Platform
+# 🚀 AeroVerse
 
 <div align="center">
 
-![AeroVerse Banner](docs/assets/banner.png)
+<img src="docs/assets/banner.png" alt="AeroVerse banner" width="100%" />
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3_LTS-black?logo=unity)](https://unity.com)
@@ -10,9 +10,9 @@
 [![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey?logo=flask)](https://flask.palletsprojects.com)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue?logo=postgresql)](https://postgresql.org)
 
-**AeroVerse** is an innovative educational platform combining Virtual Reality (VR), Artificial Intelligence (AI), and Computer Vision to deliver immersive, interactive aerospace learning experiences.
+AeroVerse is a VR-based aerospace education platform that combines 3D exploration, AI tutoring, and computer vision to make learning about space and aircraft more interactive, visual, and practical.
 
-[📋 Specification](#-project-overview) • [🗂️ Structure](#-repository-structure) • [⚙️ Setup](#-getting-started) • [📅 Sprints](#-sprint-tracker) • [👥 Team](#-team)
+[Overview](#-project-overview) • [Architecture](#-system-architecture) • [Repository Structure](#-repository-structure) • [Getting Started](#-getting-started) • [Team](#-team)
 
 </div>
 
@@ -20,120 +20,87 @@
 
 ## 📋 Project Overview
 
-AeroVerse transforms theoretical aerospace knowledge into practical exploration through:
+AeroVerse transforms theoretical aerospace knowledge into practical, immersive experiences through:
 
-- 🏛️ **Virtual Aerospace Museum** — Navigate 3D environments and interact with aerospace components
-- 🤖 **AI Tutor** — Ask questions in French or English powered by OpenAI GPT-4
-- 🔬 **Computer Vision** — Capture real aerospace components and get instant AI-powered identification
-- 🚀 **Rocket Assembly Simulation** — Hands-on simulation with real-time feedback
-- 📚 **Educational Modules** — Structured content with quizzes on rockets, satellites, and space missions
+- 🏛️ Virtual Aerospace Museum with interactive 3D environments
+- 🤖 AI-powered educational tutor in English and French
+- 🔬 Computer vision module for component recognition
+- 🚀 Rocket assembly simulation with guided tasks and feedback
+- 📚 Structured learning modules covering rockets, satellites, and space missions
 
-**Institution:** National School of Computer Science, University of Manouba  
-**Academic Year:** 2025 / 2026  
-**Project ID:** 232 — Version 01
+### Key Details
+
+- Institution: National School of Computer Science (ENSI)
+- Academic Year: 2025 / 2026
+- Project ID: 232 — Version 01
+- Goal: create a modern educational platform for aerospace outreach and learning
+
+---
+
+## 🧩 System Architecture
+
+```text
+┌─────────────────────────────────────────────┐
+│                Unity Client                 │
+│  3D Museum • Assembly Simulation • UI     │
+└──────────────────────┬──────────────────────┘
+                       │
+                       ▼
+             ┌────────────────────┐
+             │  Flask API Layer    │
+             │  Auth • Modules     │
+             │  Progress • Tutor   │
+             └─────────┬──────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+ ┌──────────────┐ ┌──────────────┐ ┌────────────────┐
+ │ PostgreSQL   │ │ OpenAI API   │ │ Computer Vision│
+ │ user data    │ │ AI tutor     │ │ object recog.  │
+ └──────────────┘ └──────────────┘ └────────────────┘
+```
 
 ---
 
 ## 🗂️ Repository Structure
 
-```
+```text
 AeroVerse/
-│
-├── 📁 app/                        # Web Application (Frontend + Backend)
-│   ├── frontend/                  # React-based user interface
+├── app/                        # Web application (frontend + backend)
+│   ├── frontend/               # React interface
 │   │   └── src/
-│   │       ├── components/        # Reusable UI components
-│   │       ├── pages/             # Application pages
-│   │       └── assets/            # Images, fonts, styles
-│   └── backend/                   # Flask REST API
-│       ├── routes/                # API endpoints
-│       ├── models/                # Database models
-│       ├── services/              # Business logic
-│       └── config/                # Configuration files
-│
-├── 📁 unity/                      # Unity 3D Application
+│   └── backend/                # Flask REST API
+│       ├── routes/
+│       ├── models/
+│       ├── services/
+│       └── config/
+├── unity/                      # Unity 3D project
 │   └── Assets/
-│       ├── Scripts/               # C# scripts
-│       │   ├── Player/            # Navigation & camera controls
-│       │   ├── UI/                # Interface managers
-│       │   ├── Hotspots/          # Interactive hotspot system
-│       │   ├── Modules/           # Educational module logic
-│       │   └── Assembly/          # Rocket assembly simulation
-│       ├── Scenes/                # Unity scenes
-│       ├── Prefabs/               # Reusable GameObjects
-│       ├── Materials/             # Shaders and materials
-│       └── Models/                # 3D aerospace models
-│
-├── 📁 computer-vision/            # CV & AI Pipeline
-│   ├── models/                    # Trained ML models
-│   ├── pipeline/                  # Image processing pipeline
-│   ├── api/                       # CV API endpoints
-│   ├── training/                  # Model training scripts
-│   └── tests/                     # CV module tests
-│
-├── 📁 docs/                       # Project documentation
-│   ├── specification/             # Specification book (LaTeX)
-│   ├── wireframes/                # UI/UX wireframes
-│   ├── uml/                       # UML diagrams
-│   └── api/                       # API documentation
-│
-└── 📁 .github/
-    ├── ISSUE_TEMPLATE/            # Bug & feature templates
-    └── workflows/                 # CI/CD pipelines
+│       ├── Scripts/
+│       ├── Scenes/
+│       ├── Prefabs/
+│       ├── Materials/
+│       └── Models/
+├── computer-vision/            # CV + AI pipeline
+│   ├── models/
+│   ├── pipeline/
+│   ├── api/
+│   ├── training/
+│   └── tests/
+├── docs/                       # Documentation and assets
+├── public/                     # Public web assets
+├── src/                        # Frontend source files
+├── .github/                    # Issue templates and workflows
+├── README.md                   # Project overview
+├── package.json                # Frontend configuration
+├── vite.config.ts              # Vite configuration
+├── tailwind.config.ts          # Tailwind configuration
+├── LICENSE                     # MIT license
+├── .gitignore                  # Git ignore rules
+├── CI.yml                      # CI workflow
+├── index.html                  # App entry
+└── package-lock.json           # Lockfile
 ```
-
----
-
-## 🏗️ Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────┐
-│                    Unity Client                      │
-│         (3D Museum + Simulation + UI)                │
-└────────────────────┬────────────────────────────────┘
-                     │ REST API
-         ┌───────────▼───────────┐
-         │    Flask Backend       │
-         │  (Auth + API + Logic)  │
-         └───┬───────────────┬───┘
-             │               │
-    ┌─────────▼────┐  ┌──────▼──────────┐
-    │  PostgreSQL   │  │  OpenAI API     │
-    │  (User data,  │  │  (AI Tutor /    │
-    │   progress)   │  │   NLP)          │
-    └──────────────┘  └─────────────────┘
-             │
-    ┌─────────▼──────────────┐
-    │  Computer Vision API   │
-    │  (Python + OpenCV +    │
-    │   TensorFlow)          │
-    └────────────────────────┘
-```
-
----
-
-## 👥 Team
-
-| Name | Role |
-|------|------|
-| **Ms. Aroua Hedhli** | Supervisor / Product Owner |
-| **Nour Mrabet** | Scrum Master |
-| **Wiem Ben El Haj Salah Bouhdid** | Developer |
-| **Nourhene Grami** | Developer |
-
----
-
-## 📅 Sprint Tracker
-
-| Sprint | Focus | Dates | Status |
-|--------|-------|-------|--------|
-| Sprint 1 | Core navigation + User management | 06/01 → 19/01/26 | ✅ Done |
-| Sprint 2 | Hotspots + Educational modules | 20/01 → 09/02/26 | ✅ Done |
-| Sprint 3 | AI Tutor integration + Quizzes | 10/02 → 02/03/26 | 🔄 In Progress |
-| Sprint 4 | Rocket assembly simulation | 03/03 → 23/03/26 | 📋 Planned |
-| Sprint 5 | Computer vision integration | 24/03 → 13/04/26 | 📋 Planned |
-| Sprint 6 | Testing + Security + Performance | 14/04 → 04/05/26 | 📋 Planned |
-| Sprint 7 | Finalization + Deployment | 05/05 → 25/05/26 | 📋 Planned |
 
 ---
 
@@ -141,41 +108,41 @@ AeroVerse/
 
 ### Prerequisites
 
-- Unity **2021.3 LTS**
-- Python **3.9+**
-- Node.js **18+**
-- PostgreSQL **14+**
+- Unity 2021.3 LTS
+- Python 3.9+
+- Node.js 18+
+- PostgreSQL 14+
 - Git
 
-### 1. Clone the repository
+### 1) Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AeroVerse.git
+git clone https://github.com/wiem-benelhajsalahbouhdid/AeroVerse.git
 cd AeroVerse
 ```
 
-### 2. Backend Setup
+### 2) Backend setup
 
 ```bash
 cd app/backend
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/bin/activate    # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env            # Fill in your credentials
+cp .env.example .env
 flask db upgrade
 flask run
 ```
 
-### 3. Frontend Setup
+### 3) Frontend setup
 
 ```bash
 cd app/frontend
 npm install
-cp .env.example .env            # Fill in your API URL
+cp .env.example .env
 npm start
 ```
 
-### 4. Computer Vision Setup
+### 4) Computer vision setup
 
 ```bash
 cd computer-vision
@@ -183,20 +150,71 @@ pip install -r requirements.txt
 python api/server.py
 ```
 
-### 5. Unity Setup
+### 5) Unity setup
 
-1. Open **Unity Hub** → Add Project → select `unity/` folder
-2. Use Unity version **2021.3 LTS**
-3. Open `Assets/Scenes/MainMuseum.unity` to start
+1. Open Unity Hub
+2. Add project from the `unity/` directory
+3. Use Unity 2021.3 LTS
+4. Open `Assets/Scenes/MainMuseum.unity`
 
 ---
 
-## 🔑 Environment Variables
+## 🧪 Features
 
-Create `.env` files based on the `.env.example` templates provided in each module.
+### Educational Experience
+- Immersive museum navigation in 3D
+- Content based on aerospace modules and missions
+- Interactive learning flow with quizzes and feedback
 
-**Backend `.env` key variables:**
-```
+### AI Tutor
+- Ask questions in French or English
+- Personalized explanations and knowledge support
+- Integration with OpenAI-based services
+
+### Computer Vision
+- Real-world component recognition
+- AI-assisted identification workflow
+- Support for educational object analysis
+
+### Simulation
+- Rocket assembly interaction
+- Guided tasks with validation
+- Immediate user feedback and learning reinforcement
+
+---
+
+## 📅 Sprint Tracker
+
+| Sprint | Focus | Status |
+|--------|-------|--------|
+| Sprint 1 | Core navigation + user management | ✅ Done |
+| Sprint 2 | Hotspots + educational modules | ✅ Done |
+| Sprint 3 | AI tutor integration + quizzes | 🔄 In Progress |
+| Sprint 4 | Rocket assembly simulation | 📋 Planned |
+| Sprint 5 | Computer vision integration | 📋 Planned |
+| Sprint 6 | Testing + security + performance | 📋 Planned |
+| Sprint 7 | Finalization + deployment | 📋 Planned |
+
+---
+
+## 👥 Team
+
+| Name | Role |
+|------|------|
+| Ms. Aroua Hedhli | Supervisor / Product Owner |
+| Nour Mrabet | Scrum Master |
+| Wiem Ben El Haj Salah Bouhdid | Developer |
+| Nourhene Grami | Developer |
+
+---
+
+## 🔐 Environment Variables
+
+Create `.env` files using the provided examples in each module.
+
+Example backend variables:
+
+```env
 FLASK_ENV=development
 DATABASE_URL=postgresql://user:password@localhost:5432/aeroverse
 OPENAI_API_KEY=your_openai_key_here
@@ -208,10 +226,12 @@ CV_API_URL=http://localhost:5001
 
 ## 📄 License
 
-This project is developed as part of an academic project at the National School of Computer Science, University of Manouba.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
-Made with ❤️ by the AeroVerse Team — ENSI 2025/2026
+
+Made with ❤️ by the AeroVerse team — ENSI 2025/2026
+
 </div>
